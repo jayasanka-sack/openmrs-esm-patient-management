@@ -29,13 +29,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: jayasanka-sack/openmrs-test-3refapp
-          path: cypress
+          path: packages/cypress
       - name: Installing dependencies
         run: yarn install
       - name: Run tests
-        run: |
-          cd packages/cypress
-          CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1
+        run: CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1
       - name: Upload screen recordings of failed tests
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
