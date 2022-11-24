@@ -31,7 +31,7 @@ jobs:
           repository: jayasanka-sack/openmrs-test-3refapp
           path: packages/cypress
       - name: Installing dependencies
-        run: yarn install --immutable
+        run: npm install
       - name: Run tests
         run: CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1
       - name: Upload screen recordings of failed tests
