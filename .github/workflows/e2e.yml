@@ -22,9 +22,9 @@ jobs:
           cd e2e
           docker-compose up -d
       - name: Wait for Openmrs instance to start
-        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:9000/openmrs/login.htm)" != "200" ]]; do sleep 10; done
       - name: Run dev server
-        run: yarn start --backend "http://localhost:8080" --port 80 &
+        run: yarn start --backend "http://localhost:9000" &
       - name: Checkout test-3refapp repo
         uses: actions/checkout@v3
         with:
@@ -35,7 +35,7 @@ jobs:
       - name: Run tests
         run: |
           cd packages/cypress
-          cypress run
+          CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1
       - name: Upload screen recordings of failed tests
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
