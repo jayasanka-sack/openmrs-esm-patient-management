@@ -19,7 +19,7 @@ services:
     volumes:
       - openmrs-data:/openmrs/data
     ports:
-      - "8080:9000"
+      - "9000:8080"
 
   # MariaDB
   db:
