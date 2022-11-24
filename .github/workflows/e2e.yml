@@ -26,10 +26,10 @@ jobs:
       - name: Run dev server
         run: yarn start --backend "http://localhost:8080" --port 80 &
       - name: Checkout test-3refapp repo
-          uses: actions/checkout@v3
-          with:
-            repository: jayasanka-sack/openmrs-test-3refapp
-            path: my-tools
+        uses: actions/checkout@v3
+        with:
+          repository: jayasanka-sack/openmrs-test-3refapp
+          path: cypress
       - name: Installing dependencies
         run: yarn install
       - name: Run tests
