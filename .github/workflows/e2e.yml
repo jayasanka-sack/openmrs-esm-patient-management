@@ -42,5 +42,5 @@ jobs:
         with:
           name: Screen recordings of failed tests
           path: |
-            tests/packages/packages/cypress/cypress/videos
-            tests/packages/packages/cypress/cypress/screenshots
+            tests/packages/cypress/cypress/videos
+            tests/packages/cypress/cypress/screenshots
