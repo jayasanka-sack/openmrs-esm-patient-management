@@ -34,7 +34,7 @@ jobs:
         run: npm install
         working-directory: tests/packages/cypress
       - name: Run tests
-        run: CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1
+        run: npm devCypress
         working-directory: tests/packages/cypress
       - name: Upload screen recordings of failed tests
         if: ${{ failure() }}
