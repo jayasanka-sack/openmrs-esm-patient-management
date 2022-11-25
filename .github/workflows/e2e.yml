@@ -2,7 +2,7 @@ name: Run E2E tests
 
 on:
   push:
-    branches: [temp]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -22,25 +22,25 @@ jobs:
           cd e2e
           docker-compose up -d
       - name: Wait for Openmrs instance to start
-        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:8080/openmrs/login.htm)" != "200" ]]; do sleep 10; done
+        run: while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' http://localhost:9000/openmrs/login.htm)" != "200" ]]; do sleep 10; done
       - name: Run dev server
-        run: yarn start --backend "http://localhost:8080" --port 80 &
+        run: yarn start --backend "http://localhost:9000" &
       - name: Checkout test-3refapp repo
-          uses: actions/checkout@v3
-          with:
-            repository: jayasanka-sack/openmrs-test-3refapp
-            path: my-tools
+        uses: actions/checkout@v3
+        with:
+          repository: jayasanka-sack/openmrs-test-3refapp
+          path: tests
       - name: Installing dependencies
-        run: yarn install
+        run: npm install
+        working-directory: tests/packages/cypress
       - name: Run tests
-        run: |
-          cd packages/cypress
-          cypress run
+        run: npm run devCypress
+        working-directory: tests/packages/cypress
       - name: Upload screen recordings of failed tests
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: Screen recordings of failed tests
           path: |
-            packages/cypress/cypress/videos
-            packages/cypress/cypress/screenshots
+            tests/packages/cypress/cypress/videos
+            tests/packages/cypress/cypress/screenshots
