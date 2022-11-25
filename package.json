@@ -14,7 +14,7 @@
     "prettier": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,css,scss}\"",
     "test": "cross-env TZ=UTC jest --config jest.config.json --verbose false --passWithNoTests",
     "test-watch": "cross-env TZ=UTC jest --watch --config jest.config.json",
-    "test-e2e": "CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress open --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1",
+    "test-e2e": "CYPRESS_BASE_URL=http://localhost:8080/openmrs/spa cypress run --env API_BASE_URL=http://localhost:8080/openmrs/ws/rest/v1",
     "coverage": "yarn test --coverage",
     "postinstall": "husky install",
     "extract-translations": "lerna run extract-translations -- --config ../../tools/i18next-parser.config.js"
