@@ -34,7 +34,7 @@ jobs:
         run: npm install
         working-directory: tests/packages/cypress
       - name: Run tests
-        run: npm devCypress
+        run: npm run devCypress
         working-directory: tests/packages/cypress
       - name: Upload screen recordings of failed tests
         if: ${{ failure() }}
