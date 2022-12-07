@@ -20,6 +20,8 @@ jobs:
         run: yarn
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Run dev server
+        run: yarn start &
       - name: Run E2E tests
         run: yarn playwright test --project=chromium
       - uses: actions/upload-artifact@v3
