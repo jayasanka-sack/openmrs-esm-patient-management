@@ -1,8 +1,7 @@
 import { test } from '../core';
 import { HomePage } from '../pages/homePage';
 import { expect } from '@playwright/test';
-import { generateRandomPatient, deletePatient } from '../commands';
-import { Patient } from '../core/types';
+import { generateRandomPatient, deletePatient, Patient } from '../commands';
 
 let patient: Patient;
 
@@ -10,13 +9,14 @@ test.beforeEach(async ({ api }) => {
   patient = await generateRandomPatient(api);
 });
 
-test('should be able to search patients by identifier', async ({ loginAsAdmin: page, api }) => {
+test('should be able to search patients by identifier', async ({ page, api }) => {
   // extract details from the created patient
   const openmrsIdentifier = patient.identifiers[0].display.split('=')[1].trim();
   const firstName = patient.person.display.split(' ')[0];
   const lastName = patient.person.display.split(' ')[1];
 
   const homePage = new HomePage(page);
+  await homePage.goto();
 
   await homePage.searchPatient(openmrsIdentifier);
 
@@ -28,13 +28,14 @@ test('should be able to search patients by identifier', async ({ loginAsAdmin: p
   await expect(homePage.page).toHaveURL(new RegExp(`/patient/${patient.uuid}/chart`));
 });
 
-test('should be able to search patients by name', async ({ loginAsAdmin: page, api }) => {
+test('should be able to search patients by name', async ({ page, api }) => {
   // extract details from the created patient
   const openmrsIdentifier = patient.identifiers[0].display.split('=')[1].trim();
   const firstName = patient.person.display.split(' ')[0];
   const lastName = patient.person.display.split(' ')[1];
 
   const homePage = new HomePage(page);
+  await homePage.goto();
 
   await homePage.searchPatient(`${firstName} ${lastName}`);
 

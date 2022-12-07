@@ -1,12 +1,5 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test';
-
-export const playwrightVariables = {
-  UI_BASE_URL: 'http://localhost:8080/openmrs/spa/',
-  WS_BASE_URL: 'http://localhost:8080/openmrs/ws/',
-  USER_ADMIN_USERNAME: 'Admin',
-  USER_ADMIN_PASSWORD: 'Admin123',
-  LOGIN_DEFAULT_LOCATION_NAME: 'Outpatient Clinic',
-};
+require('dotenv').config();
 
 // See https://playwright.dev/docs/test-configuration.
 const config: PlaywrightTestConfig = {
@@ -17,10 +10,12 @@ const config: PlaywrightTestConfig = {
   },
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   reporter: 'html',
+  globalSetup: require.resolve('./e2e/core/global-setup'),
   use: {
-    baseURL: playwrightVariables.UI_BASE_URL,
+    baseURL: process.env.E2E_UI_BASE_URL,
+    storageState: 'e2e/storageState.json',
     trace: 'on-first-retry',
     video: 'on-first-retry',
   },

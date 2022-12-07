@@ -3743,6 +3743,7 @@ __metadata:
     concurrently: ^5.3.0
     cross-env: ^7.0.3
     dayjs: ^1.8.36
+    dotenv: ^16.0.3
     eslint: ^7.20.0
     eslint-config-prettier: ^8.2.0
     eslint-config-ts-react-important-stuff: ^3.0.0
@@ -8796,6 +8797,13 @@ __metadata:
   dependencies:
     is-obj: ^2.0.0
   checksum: d5775790093c234ef4bfd5fbe40884ff7e6c87573e5339432870616331189f7f5d86575c5b5af2dcf0f61172990f4f734d07844b1f23482fff09e3c4bead05ea
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.0.3":
+  version: 16.0.3
+  resolution: "dotenv@npm:16.0.3"
+  checksum: afcf03f373d7a6d62c7e9afea6328e62851d627a4e73f2e12d0a8deae1cd375892004f3021883f8aec85932cd2834b091f568ced92b4774625b321db83b827f8
   languageName: node
   linkType: hard
 

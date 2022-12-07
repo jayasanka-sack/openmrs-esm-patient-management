@@ -1,5 +1,33 @@
-import { Patient } from '../core/types';
 import { APIRequestContext, expect } from '@playwright/test';
+
+export interface Patient {
+  uuid: string;
+  identifiers: Identifier[];
+  person: {
+    display: string;
+    addresses: Address[];
+    age: number;
+    birthdate: string;
+    gender: string;
+    death: boolean;
+    deathDate: string;
+  };
+  attributes: { value: string; attributeType: { uuid: string; display: string } }[];
+}
+
+export interface Address {
+  preferred: boolean;
+  address1: string;
+  cityVillage: string;
+  country: string;
+  postalCode: string;
+  stateProvince: string;
+}
+
+export interface Identifier {
+  uuid: string;
+  display: string;
+}
 
 export const generateRandomPatient = async (api: APIRequestContext): Promise<Patient> => {
   const identifierRes = await api.post(
@@ -48,7 +76,6 @@ export const generateRandomPatient = async (api: APIRequestContext): Promise<Pat
     },
   });
   await expect(patientRes.ok()).toBeTruthy();
-
   return await patientRes.json();
 };
 

@@ -1,5 +1,4 @@
 import { APIRequestContext, PlaywrightWorkerArgs, WorkerFixture } from '@playwright/test';
-import { playwrightVariables } from '../../playwright.config';
 
 /**
  * A fixture which initializes an [`APIRequestContext`](https://playwright.dev/docs/api/class-apirequestcontext)
@@ -16,10 +15,10 @@ import { playwrightVariables } from '../../playwright.config';
  */
 export const api: WorkerFixture<APIRequestContext, PlaywrightWorkerArgs> = async ({ playwright }, use) => {
   const ctx = await playwright.request.newContext({
-    baseURL: playwrightVariables.WS_BASE_URL,
+    baseURL: process.env.E2E_WS_BASE_URL,
     httpCredentials: {
-      username: playwrightVariables.USER_ADMIN_USERNAME,
-      password: playwrightVariables.USER_ADMIN_PASSWORD,
+      username: process.env.E2E_USER_ADMIN_USERNAME,
+      password: process.env.E2E_USER_ADMIN_PASSWORD,
     },
   });
 
