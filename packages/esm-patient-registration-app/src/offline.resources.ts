@@ -36,6 +36,7 @@ export async function fetchAllRelationshipTypes(abortController?: AbortControlle
 export async function fetchPatientIdentifierTypesWithSources(
   abortController?: AbortController,
 ): Promise<Array<PatientIdentifierType>> {
+  debugger;
   const patientIdentifierTypes = await fetchPatientIdentifierTypes(abortController);
 
   // @ts-ignore Reason: The required props of the type are generated below.
@@ -90,6 +91,7 @@ async function fetchPatientIdentifierTypes(
         identifierTypes.push(mapPatientIdentifierType(type, false));
       }
     });
+
     return identifierTypes.map((identifierType) => ({
       ...identifierType,
       fieldName: camelCase(identifierType.name),
