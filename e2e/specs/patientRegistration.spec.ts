@@ -10,13 +10,7 @@ test('should be able to register a patient', async ({ page, api }) => {
     givenName: 'Johnny',
     middleName: 'Donny',
     familyName: 'Ronny',
-    sex: 'male',
-    birthdate: '1/1/2000',
   };
 
   await patientRegistrationPAge.fillPatientRegistrationForm(formValues);
-});
-
-test.afterEach(async ({ api }) => {
-  // await deletePatient(api, patient.uuid);
 });

@@ -22,18 +22,9 @@ export class PatientRegistrationPage {
   constructor(readonly page: Page) {}
 
   readonly givenNameInput = () => this.page.locator('#givenName');
-  // readonly middleNameInput = () => this.page.locator('#middleName');
-  // readonly familyNameInput = () => this.page.locator('#familyName');
-  // readonly sexRadioButton = (sex: PatientRegistrationSex) => this.page.locator(`label[for=${sex}]`);
-  // readonly birthdateInput = () => this.page.locator('#birthdate');
-  // readonly postalCodeInput = () => this.page.locator('#postalCode');
-  // readonly address1Input = () => this.page.locator('#address1');
-  // readonly address2Input = () => this.page.locator('#address2');
-  // readonly countryInput = () => this.page.locator('#country');
-  // readonly stateProvinceInput = () => this.page.locator('#stateProvince');
-  // readonly cityVillageInput = () => this.page.locator('#cityVillage');
-  // readonly phoneInput = () => this.page.locator('#phone');
-  // readonly emailInput = () => this.page.locator('#email');
+  readonly middleNameInput = () => this.page.locator('#middleName');
+  readonly familyNameInput = () => this.page.locator('#familyName');
+  // TODO: add other fields
   readonly createPatientButton = () => this.page.locator('button[type=submit]');
 
   async goto(editPatientUuid?: string) {
@@ -43,21 +34,10 @@ export class PatientRegistrationPage {
   async fillPatientRegistrationForm(formValues: PatientRegistrationFormValues) {
     const tryFill = (locator: Locator, value?: string) => value && locator.fill(value);
 
-    // formValues.sex && (await this.sexRadioButton(formValues.sex).check());
     await tryFill(this.givenNameInput(), formValues.givenName);
-    // await tryFill(this.middleNameInput(), formValues.middleName);
-    // await tryFill(this.familyNameInput(), formValues.familyName);
-    // await tryFill(this.birthdateInput(), formValues.birthdate);
-    // await tryFill(this.postalCodeInput(), formValues.postalCode);
-    // await tryFill(this.address1Input(), formValues.address1);
-    // await tryFill(this.address2Input(), formValues.address2);
-    // await tryFill(this.countryInput(), formValues.country);
-    // await tryFill(this.stateProvinceInput(), formValues.stateProvince);
-    // await tryFill(this.cityVillageInput(), formValues.cityVillage);
-    // await tryFill(this.phoneInput(), formValues.phone);
-    // await tryFill(this.emailInput(), formValues.email);
-
+    await tryFill(this.middleNameInput(), formValues.middleName);
+    await tryFill(this.familyNameInput(), formValues.familyName);
+    // TODO: fill other fields
     await this.createPatientButton().click();
-    // await expect(this.page).toHaveURL(/patient\/(.+)\/chart/);
   }
 }
