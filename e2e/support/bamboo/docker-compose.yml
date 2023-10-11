@@ -4,8 +4,11 @@ version: "3.7"
 services:
   playwright:
     build:
-      context: .
-      dockerfile: playwright.Dockerfile
+      context: ../../../
+      dockerfile: e2e/support/bamboo/playwright.Dockerfile
+      args:
+        USER_ID: ${USER_ID}
+        GROUP_ID: ${GROUP_ID}
     container_name: my-playwright-tests-container
     working_dir: /app
     command: sh /app/e2e/support/bamboo/e2e-test-runner.sh
