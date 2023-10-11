@@ -10,3 +10,4 @@ export CI=true
 #done
 
 npx playwright test -g "View active visits"
+
