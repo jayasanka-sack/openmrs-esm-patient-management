@@ -39,6 +39,5 @@ services:
     image: openmrs/openmrs-reference-application-3-backend:nightly-with-data
     depends_on:
       - db
-      - playwright
   db:
     image: openmrs/openmrs-reference-application-3-db:nightly-with-data
