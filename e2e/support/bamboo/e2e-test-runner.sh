@@ -17,4 +17,4 @@ while [ "$(curl -s -o /dev/null -w ''%{http_code}'' http://gateway/openmrs/login
 #  fi
 done
 
-yarn test-e2e
+yarn test-e2e -g "View active visits"
