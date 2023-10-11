@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export E2E_BASE_URL=https://dev3.openmrs.org/openmrs
+export E2E_BASE_URL=http://gateway/openmrs
 export CI=true
 
 while [ "$(curl -s -o /dev/null -w ''%{http_code}'' $E2E_BASE_URL/login.htm)" != "200" ]; do
@@ -8,6 +8,5 @@ while [ "$(curl -s -o /dev/null -w ''%{http_code}'' $E2E_BASE_URL/login.htm)" !=
   sleep 10
 
 done
-
 
 npx playwright test -g "View active visits"
