@@ -20,3 +20,5 @@ RUN useradd -u $USER_ID -g $GROUP_ID -m playwrightuser
 USER playwrightuser
 
 RUN yarn install
+
+COPY . .
