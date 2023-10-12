@@ -10,8 +10,8 @@ services:
         USER_ID: ${USER_ID}
         GROUP_ID: ${GROUP_ID}
     container_name: my-playwright-tests-container
-    working_dir: /app
-    command: sh /app/e2e/support/bamboo/e2e-test-runner.sh
+    working_dir: /tests
+    command: sh /tests/e2e/support/bamboo/e2e-test-runner.sh
     volumes:
       - ../../../:/app
     networks:

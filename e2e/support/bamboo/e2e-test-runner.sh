@@ -9,5 +9,7 @@ export CI=true
 #
 #done
 
-npx playwright test -g "View active visits"
+yarn playwright test -g "View active visits"
 
+cp /tests/playwright-report /app/playwright-report
+cp /tests/results.xml /app/results.xml
