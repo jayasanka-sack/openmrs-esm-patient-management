@@ -1,8 +1,12 @@
 # syntax=docker/dockerfile:1.3
 FROM mcr.microsoft.com/playwright:v1.34.0-jammy
 
-RUN mkdir /tests
-RUN chmod 777 /tests
+WORKDIR /tests
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN chmod -R 777 /tests
 
 ARG USER_ID
 ARG GROUP_ID
@@ -14,10 +18,5 @@ fi
 RUN useradd -u $USER_ID -g $GROUP_ID -m playwrightuser
 
 USER playwrightuser
-
-WORKDIR /tests
-
-COPY package.json .
-COPY yarn.lock .
 
 RUN yarn install
