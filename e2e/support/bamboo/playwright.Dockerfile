@@ -6,9 +6,7 @@ WORKDIR /tests
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install
-
-COPY . .
+RUN chmod -R 777 /tests
 
 ARG USER_ID
 ARG GROUP_ID
@@ -21,4 +19,4 @@ RUN useradd -u $USER_ID -g $GROUP_ID -m playwrightuser
 
 USER playwrightuser
 
-
+RUN yarn install
