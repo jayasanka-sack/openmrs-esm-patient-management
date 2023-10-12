@@ -10,8 +10,6 @@ RUN yarn install
 
 COPY . .
 
-RUN chmod -R 777 /tests
-
 ARG USER_ID
 ARG GROUP_ID
 
