@@ -10,4 +10,4 @@ export CI=true
 #
 #done
 
-yarn playwright test -g "View active visits"
+yarn playwright test
