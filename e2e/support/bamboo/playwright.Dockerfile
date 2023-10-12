@@ -2,11 +2,7 @@
 FROM mcr.microsoft.com/playwright:v1.34.0-jammy
 
 WORKDIR /tests
-
-COPY package.json .
-COPY yarn.lock .
-
-RUN chmod -R 777 /tests
+COPY . .
 
 ARG USER_ID
 ARG GROUP_ID
@@ -19,6 +15,5 @@ RUN useradd -u $USER_ID -g $GROUP_ID -m playwrightuser
 
 USER playwrightuser
 
-RUN yarn install
 
-COPY . .
+

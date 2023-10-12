@@ -8,6 +8,7 @@ export CI=true
 #  sleep 10
 #
 #done
+yarn install
 
 yarn playwright test -g "View active visits"
 
