@@ -1,6 +1,9 @@
 # syntax=docker/dockerfile:1.3
 FROM mcr.microsoft.com/playwright:v1.34.0-jammy
 
+RUN mkdir /tests
+RUN chmod 777 /tests
+
 ARG USER_ID
 ARG GROUP_ID
 
