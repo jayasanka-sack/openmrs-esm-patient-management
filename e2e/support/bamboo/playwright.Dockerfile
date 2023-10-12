@@ -1,9 +1,6 @@
 # syntax=docker/dockerfile:1.3
 FROM mcr.microsoft.com/playwright:v1.34.0-jammy
 
-WORKDIR /tests
-COPY . .
-
 ARG USER_ID
 ARG GROUP_ID
 
@@ -14,6 +11,3 @@ fi
 RUN useradd -u $USER_ID -g $GROUP_ID -m playwrightuser
 
 USER playwrightuser
-
-
-
