@@ -37,7 +37,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 #          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
 #          plugins: 'code-review@claude-code-plugins'
-          prompt: 'review this PR for code quality, correctness, and maintainability. Provide specific feedback and suggestions for improvement.'
+          prompt: 'review this PR.'
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
