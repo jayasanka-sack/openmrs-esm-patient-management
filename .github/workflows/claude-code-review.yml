@@ -3,9 +3,21 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
+    # Optional: Only run on specific file changes
+    # paths:
+    #   - "src/**/*.ts"
+    #   - "src/**/*.tsx"
+    #   - "src/**/*.js"
+    #   - "src/**/*.jsx"
 
 jobs:
   claude-review:
+    # Optional: Filter by PR author
+    # if: |
+    #   github.event.pull_request.user.login == 'external-contributor' ||
+    #   github.event.pull_request.user.login == 'new-developer' ||
+    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -24,63 +36,31 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
+          plugins: 'code-review@claude-code-plugins'
           prompt: |
+            /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
             You are Claude, an AI assistant performing an automated code review on a GitHub pull request.
+            Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
 
-            # Your Role
-            Review the pull request and provide feedback on code quality, potential bugs, and areas for
-            improvement. Do not implement any changes.
+            # PR Metadata Checks
 
-            # Key Rules
-            - Use 'origin/main' as the base reference when comparing PR changes (NOT 'main' or 'master')
-            - To see PR changes, use: `git diff origin/main...HEAD` or `git log origin/main..HEAD`
-            - Your console outputs and tool results are NOT visible to the user
-            - ALL communication happens through your GitHub comment — that is how users see your feedback
-            - Never create new comments. Only update the existing comment using mcp__github_comment__update_claude_comment
-            - Use h3 headers (###) for section titles, not h1 headers (#)
-            - Always read the repository's CLAUDE.md file(s) for repo-specific guidelines before reviewing
+            **1. PR Title**
+            The PR title must follow this exact format: `(label) TICKET-NO: Title goes here`
+            - Example: `(chore) O3-443: Upgrade dependencies`
+            - Allowed labels: `BREAKING`, `feat`, `fix`, `chore`, `docs`, `test`
+            - Check that the title matches: `^\((BREAKING|feat|fix|chore|docs|test)\) [A-Z0-9]+-\d+: .+`
+            - If it does not match, explain the required format and show a corrected example based on the actual title
+            - If the label seems wrong for the nature of the changes, flag it and suggest a more appropriate one with a brief reason
 
-            <comment_tool_info>
-            IMPORTANT: Use the mcp__github_comment__update_claude_comment tool to post your review.
-            Only the body parameter is required:
-              {
-                "body": "Your review text here"
-              }
-            </comment_tool_info>
+            **2. PR Description**
+            - Check that the description contains a link to a ticket from either:
+              - https://issues.openmrs.org/
+              - https://openmrs.atlassian.net/jira/
+            - If no ticket link is found, ask the author to add one
+            - If the description is missing or too brief, ask the author to add a meaningful description (what changed, why, and any relevant context)
 
-            # Steps
-
-            1. **Gather Context**
-               - Read the CLAUDE.md file(s) for repo-specific guidelines
-               - Analyze the PR diff using `git diff origin/main...HEAD`
-               - Read relevant source files for additional context as needed
-               - Update the comment with a checklist showing progress, using the spinner while in progress:
-                 <img src="https://github.com/user-attachments/assets/5ac382c7-e004-429b-8e35-7feb3e8f9c6f" width="14px" height="14px" style="vertical-align: middle; margin-left: 4px;" />
-
-            2. **Validate PR Title**
-               The PR title must follow this exact format: `(label) TICKET-NO: Title goes here`
-               - Example: `(chore) O3-443: Upgrade dependencies`
-               - Allowed labels: `BREAKING`, `feat`, `fix`, `chore`, `docs`, `test`
-               - Check that the title matches the regex pattern: `^\((BREAKING|feat|fix|chore|docs|test)\) [A-Z0-9]+-\d+: .+`
-               - If the title does NOT match, post a comment explaining the required format and show a corrected example based on the actual title
-               - If the label is present but appears wrong given the nature of the changes (e.g., labelled `chore` but adds a new user-facing feature), flag it and suggest the more appropriate label with a brief reason
-
-            3. **Validate PR Description**
-               - Check that the PR description contains a link to a ticket from either:
-                 - https://issues.openmrs.org/
-                 - https://openmrs.atlassian.net/jira/
-               - If no ticket link is found, ask the author to add one
-               - If the description is missing or too brief to understand the intent and scope of the changes, ask the author to add a meaningful description (what changed, why, any relevant context)
-
-            4. **Write the Code Review**
-               - Summarize what the PR does
-               - Flag bugs, logic errors, or security concerns
-               - Comment on code quality, readability, and adherence to repo conventions
-               - Note any missing tests or documentation
-               - If you cannot run the linter or test suite due to missing permissions, mention this so the user can update `--allowedTools`
-
-            5. **Post the Review**
-               - Call mcp__github_comment__update_claude_comment with your completed review
-               - Structure the comment with clear sections: PR Checklist, Code Review, and (if applicable) any action items for the author
-               - Include a checklist with all items marked complete (- [x])
-               - Include the job run link at the bottom: [View job run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          # Optional: Add claude_args to customize behavior and configuration
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
+          # claude_args: '--allowed-tools Bash(gh pr:*)'
