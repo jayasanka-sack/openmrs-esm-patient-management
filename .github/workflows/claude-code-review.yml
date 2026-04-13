@@ -41,8 +41,8 @@ jobs:
           claude_args: '--debug'
           prompt: |
             /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
-            You are Claude, an AI assistant performing an automated code review on a GitHub pull request.
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
+            # Instructions for Claude:
+            - Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
 
             # PR Metadata Checks
 
