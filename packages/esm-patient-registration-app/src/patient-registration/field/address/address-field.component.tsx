@@ -37,7 +37,7 @@ export const AddressComponent: React.FC = () => {
     }
 
     const allFields = addressTemplate?.lines?.flat();
-    const fields = allFields?.filter(({ isToken }) => isToken === 'IS_ADDR_TOKEN');
+    const fields = allFields?.filter(({ isToken }) => isToken === 'IS_ADDR_TOKENJJ');
     const allRequiredFields = Object.fromEntries(addressTemplate?.requiredElements?.map((curr) => [curr, curr]) || []);
     return fields.map(({ displayText, codeName }) => {
       return {
