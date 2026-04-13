@@ -1,23 +1,14 @@
 name: Claude Code Review
-
+# See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+# or https://code.claude.com/docs/en/cli-reference for available options
+# claude_args: '--allowed-tools Bash(gh pr:*)'
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**/*.ts"
-    #   - "src/**/*.tsx"
-    #   - "src/**/*.js"
-    #   - "src/**/*.jsx"
+
 
 jobs:
   claude-review:
-    # Optional: Filter by PR author
-    # if: |
-    #   github.event.pull_request.user.login == 'external-contributor' ||
-    #   github.event.pull_request.user.login == 'new-developer' ||
-    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -40,28 +31,4 @@ jobs:
           plugins: 'code-review@claude-code-plugins'
           claude_args: '--debug'
           prompt: |
-            /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
-            # Instructions for Claude:
-            - Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
-
-            # PR Metadata Checks
-
-            **1. PR Title**
-            The PR title must follow this exact format: `(label) TICKET-NO: Title goes here`
-            - Example: `(chore) O3-443: Upgrade dependencies`
-            - Allowed labels: `BREAKING`, `feat`, `fix`, `chore`, `docs`, `test`
-            - Check that the title matches: `^\((BREAKING|feat|fix|chore|docs|test)\) [A-Z0-9]+-\d+: .+`
-            - If it does not match, explain the required format and show a corrected example based on the actual title
-            - If the label seems wrong for the nature of the changes, flag it and suggest a more appropriate one with a brief reason
-
-            **2. PR Description**
-            - Check that the description contains a link to a ticket from either:
-              - https://issues.openmrs.org/
-              - https://openmrs.atlassian.net/jira/
-            - If no ticket link is found, ask the author to add one
-            - If the description is missing or too brief, ask the author to add a meaningful description (what changed, why, and any relevant context)
-
-          # Optional: Add claude_args to customize behavior and configuration
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr:*)'
+            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
