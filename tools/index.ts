@@ -5,7 +5,7 @@ export {
   mockPatientWithoutFormattedName,
   patientChartBasePath,
   renderWithContext,
-  renderWithSwr,
+  renderWithSw,
   renderWithRouter,
   waitForLoadingToFinish,
   withSwr,
