@@ -38,10 +38,11 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
+          claude_args: '--debug'
           prompt: |
             /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
-            You are Claude, an AI assistant performing an automated code review on a GitHub pull request.
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
+            # Instructions for Claude:
+            - Use `gh pr comment` with your Bash tool to leave your review as a comment on the pull request.
 
             # PR Metadata Checks
 
