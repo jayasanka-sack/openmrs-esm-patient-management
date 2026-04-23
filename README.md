@@ -1,6 +1,6 @@
 :wave: *New to our project? Be sure to review the [OpenMRS 3 Frontend Developer Documentation](https://openmrs.atlassian.net/wiki/x/IABBHg). You may find the [Map of the Project](https://openmrs.atlassian.net/wiki/x/MgBuHg) especially helpful.* :teacher:
 
-> **Contributing:** See the [contributing guidelines](CONTRIBUTING.md) for how to get involved.
+> **Contributing:** See the [contributing guidelines](CONTRIBUTING.md) for how to get involved!
 
 ![Node.js CI](https://github.com/openmrs/openmrs-esm-patient-management/actions/workflows/ci.yml/badge.svg)
 
