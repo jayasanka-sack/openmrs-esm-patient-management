@@ -12,7 +12,12 @@ import {
 } from '../../patient-registration-context';
 import { ResourcesContextProvider } from '../../../resources-context';
 import PatientIdentifierOverlay from './identifier-selection-overlay.component';
-import type { AddressTemplate, FormValues, PatientIdentifierType } from '../../patient-registration.types';
+import type {
+  AddressTemplate,
+  FormValues,
+  NameTemplate,
+  PatientIdentifierType,
+} from '../../patient-registration.types';
 import type { Resources } from '../../../offline.resources';
 
 const mockUseConfig = jest.mocked(useConfig<RegistrationConfig>);
@@ -74,6 +79,7 @@ const mockIdentifierTypes: PatientIdentifierType[] = [
 
 const mockResourcesContextValue: Resources = {
   addressTemplate: {} as AddressTemplate,
+  nameTemplate: {} as NameTemplate,
   currentSession: mockSession.data,
   identifierTypes: mockIdentifierTypes,
   relationshipTypes: { results: [] },

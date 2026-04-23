@@ -5,7 +5,8 @@ import { getDefaultsFromConfigSchema, useConfig } from '@openmrs/esm-framework';
 import { Field } from './field.component';
 import { esmPatientRegistrationSchema, type RegistrationConfig } from '../../config-schema';
 import { type Resources } from '../../offline.resources';
-import type { AddressTemplate, FormValues } from '../patient-registration.types';
+import type { AddressTemplate, FormValues, NameTemplate } from '../patient-registration.types';
+import { mockedNameTemplate } from '__mocks__';
 import { PatientRegistrationContextProvider } from '../patient-registration-context';
 import { ResourcesContextProvider } from '../../resources-context';
 import { renderWithContext } from 'tools';
@@ -85,6 +86,7 @@ const mockIdentifierTypes = [
 
 const mockResourcesContextValue: Resources = {
   addressTemplate: predefinedAddressTemplate as unknown as AddressTemplate,
+  nameTemplate: mockedNameTemplate as unknown as NameTemplate,
   currentSession: {
     authenticated: true,
     sessionId: 'JSESSION',
