@@ -26,7 +26,7 @@ export function editPatientNote(obsUuid: string, note: string) {
 
 export function usePatientNotes(patientUuid: string, visitUuid: string, conceptUuids: Array<string>): UsePatientNotes {
   const customRepresentation =
-    'custom:(uuid,encounterDatetime,patient:(uuid),obs:(uuid,concept:(uuid),dateCreated,value:(uuid),previousVersions:(value,dateCreated,creator),creator),encounterType,' +
+    'custom:(uuid,encounterDatetime,patient:(uuid),obs:(uuid,concept:(uuid),dateCreated,value,previousVersions:(value,dateCreated,creator),creator),encounterType,' +
     'encounterProviders:(uuid,provider:(uuid,person:(uuid,display)))';
   const encountersApiUrl = `${restBaseUrl}/encounter?patient=${patientUuid}&visit=${visitUuid}&v=${customRepresentation}`;
 
