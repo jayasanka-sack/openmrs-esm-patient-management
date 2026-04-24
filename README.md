@@ -20,7 +20,7 @@ This repository contains frontend modules for O3. These modules relate to regist
 
 Check out the developer documentation [in the Wiki](https://openmrs.atlassian.net/wiki/x/IABBHg).
 
-This monorepo uses [yarn](https://yarnpkg.com).
+This monorepo uses [Yarn](https://yarnpkg.com).
 
 To install the dependencies, run:
 
