@@ -1,4 +1,4 @@
-import { type Obs, type Concept, type OpenmrsResource } from '@openmrs/esm-framework';
+import { type Concept, type OpenmrsResource } from '@openmrs/esm-framework';
 
 export interface RESTPatientNote extends OpenmrsResource {
   uuid: string;
@@ -9,6 +9,19 @@ export interface RESTPatientNote extends OpenmrsResource {
   location: { uuid: string; display: string; name: string };
   obs: Array<ObsData>;
   diagnoses: Array<OpenmrsResource>;
+}
+
+export interface ObsCreator {
+  display: string;
+  person?: { display: string };
+}
+
+export interface ObsPreviousVersion {
+  uuid: string;
+  value?: string | any;
+  dateCreated: string;
+  creator?: ObsCreator;
+  previousVersion?: ObsPreviousVersion;
 }
 
 export interface PatientNote {
@@ -46,11 +59,7 @@ export interface ObsData {
     value?: string | any;
   }>;
   obsDatetime: string;
-  creator?: { display: string; person?: { display: string } };
-  previousVersions?: Array<
-    Obs & {
-      creator: { display: string; person?: { display: string } };
-    }
-  >;
+  creator?: ObsCreator;
+  previousVersion?: ObsPreviousVersion;
   dateCreated: string;
 }
