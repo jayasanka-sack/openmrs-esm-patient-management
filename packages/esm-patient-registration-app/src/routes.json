@@ -3,6 +3,16 @@
   "backendDependencies": {
     "webservices.rest": ">=2.2.0"
   },
+  "optionalBackendDependencies": {
+    "webservices.rest": {
+      "version": "^2.49.0",
+      "feature": {
+        "flagName": "name-template-layout",
+        "label": "Patient Registration Name Layout",
+        "description": "Render the patient registration name fields according to the configured OpenMRS name template, enabling locale-specific field sets and order."
+      }
+    }
+  },
   "pages": [
     {
       "component": "root",

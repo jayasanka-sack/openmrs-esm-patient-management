@@ -12,6 +12,7 @@ import type {
   ConceptResponse,
   FetchedPatientIdentifierType,
   IdentifierSourceAutoGenerationOption,
+  NameTemplate,
   PatientIdentifierType,
   PersonAttributeTypeResponse,
   RelationshipTypesResponse,
@@ -21,6 +22,7 @@ import type { FieldDefinition } from './config-schema';
 
 export interface Resources {
   addressTemplate: AddressTemplate;
+  nameTemplate: NameTemplate;
   currentSession: Session;
   relationshipTypes: RelationshipTypesResponse;
   identifierTypes: Array<PatientIdentifierType>;
@@ -33,6 +35,11 @@ export async function fetchCurrentSession(): Promise<Session> {
 
 export async function fetchAddressTemplate() {
   const { data } = await cacheAndFetch<AddressTemplate>(`${restBaseUrl}/addresstemplate`);
+  return data;
+}
+
+export async function fetchNameTemplate() {
+  const { data } = await cacheAndFetch<NameTemplate>(`${restBaseUrl}/nametemplate/layout.name.format`);
   return data;
 }
 

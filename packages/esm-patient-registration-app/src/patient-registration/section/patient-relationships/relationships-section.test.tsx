@@ -95,6 +95,7 @@ describe('RelationshipsSection', () => {
     it('renders a loader when relationshipTypes are not available', () => {
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -116,6 +117,7 @@ describe('RelationshipsSection', () => {
     it('renders the relationships section when relationshipTypes are available', () => {
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -134,6 +136,7 @@ describe('RelationshipsSection', () => {
     it('renders existing relationships', () => {
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -166,6 +169,7 @@ describe('RelationshipsSection', () => {
     it('renders relationship type options', () => {
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -193,6 +197,7 @@ describe('RelationshipsSection', () => {
       const user = userEvent.setup();
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -227,6 +232,7 @@ describe('RelationshipsSection', () => {
       const user = userEvent.setup();
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',
@@ -263,6 +269,7 @@ describe('RelationshipsSection', () => {
       const user = userEvent.setup();
       const mockResourcesContextValue = {
         addressTemplate: null,
+        nameTemplate: null,
         currentSession: {
           authenticated: true,
           sessionId: 'JSESSION',

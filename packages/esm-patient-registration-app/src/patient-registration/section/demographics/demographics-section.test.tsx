@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Formik, Form } from 'formik';
-import { getDefaultsFromConfigSchema, useConfig } from '@openmrs/esm-framework';
+import { getDefaultsFromConfigSchema, useConfig, useFeatureFlag } from '@openmrs/esm-framework';
 import { initialFormValues } from '../../patient-registration.component';
 import { type FormValues } from '../../patient-registration.types';
 import { DemographicsSection } from './demographics-section.component';
@@ -9,6 +9,7 @@ import { PatientRegistrationContextProvider } from '../../patient-registration-c
 import { type RegistrationConfig, esmPatientRegistrationSchema } from '../../../config-schema';
 
 const mockUseConfig = jest.mocked(useConfig<RegistrationConfig>);
+const mockUseFeatureFlag = jest.mocked(useFeatureFlag);
 
 /**
  * Helper to render DemographicsSection with Formik for state-dependent tests.
@@ -59,6 +60,7 @@ function renderDemographicsSectionWithFormik(
 
 describe('Demographics section', () => {
   beforeEach(() => {
+    mockUseFeatureFlag.mockImplementation((flagName) => (flagName === 'name-template-layout' ? false : false));
     mockUseConfig.mockReturnValue({
       ...getDefaultsFromConfigSchema(esmPatientRegistrationSchema),
       fieldConfigurations: {
