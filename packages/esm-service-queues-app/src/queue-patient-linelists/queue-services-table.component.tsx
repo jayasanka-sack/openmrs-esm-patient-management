@@ -2,13 +2,18 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useServiceQueueEntries } from '../service-queues.resource';
 import QueuePatientBaseTable from './queue-linelist-base-table.component';
+import { useParams } from 'react-router-dom';
 
 const ServicesTable: React.FC = () => {
   const { t } = useTranslation();
 
-  const currentPathName: string = window.location.pathname.replace('%20', ' ');
-  let service = currentPathName.split('/')[6];
-  let locationUuid = currentPathName.split('/')[8];
+  const { service: encodedService, locationUuid } = useParams<{
+    service: string;
+    locationUuid: string;
+  }>();
+
+  const service = decodeURIComponent(encodedService);
+
   const { serviceQueueEntries, isLoading } = useServiceQueueEntries(service, locationUuid);
 
   const tableHeaders = useMemo(
