@@ -15,6 +15,7 @@ import type {
   AddressTemplate,
   FormValues,
   IdentifierSource,
+  NameTemplate,
   PatientIdentifierValue,
 } from '../../../patient-registration.types';
 import IdentifierInput from './identifier-input.component';
@@ -63,6 +64,7 @@ const mockIdentifierTypes = [
 
 const mockResourcesContextValue: Resources = {
   addressTemplate: {} as AddressTemplate,
+  nameTemplate: {} as NameTemplate,
   currentSession: {
     authenticated: true,
     sessionId: 'JSESSION',

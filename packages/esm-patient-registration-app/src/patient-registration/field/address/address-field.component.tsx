@@ -9,7 +9,7 @@ import {
   usePatientRegistrationContext,
 } from '../../patient-registration-context';
 import { ResourcesContextProvider, useResourcesContext } from '../../../resources-context';
-import { type AddressTemplate } from '../../patient-registration.types';
+import { type AddressTemplate, type NameTemplate } from '../../patient-registration.types';
 import { Input } from '../../input/basic-input/input/input.component';
 import AddressHierarchyLevels from './address-hierarchy-levels.component';
 import AddressSearchComponent from './address-search.component';
@@ -158,6 +158,7 @@ const AddressComponentContainer = ({ children }) => {
     <ResourcesContextProvider
       value={{
         addressTemplate: {} as AddressTemplate,
+        nameTemplate: {} as NameTemplate,
         currentSession: {} as Session,
         identifierTypes: [],
         relationshipTypes: { results: [] },

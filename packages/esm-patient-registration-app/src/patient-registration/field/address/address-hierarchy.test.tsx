@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik';
 import { getDefaultsFromConfigSchema, useConfig } from '@openmrs/esm-framework';
 import { mockedAddressTemplate, mockedOrderedFields, mockOpenmrsId, mockPatient, mockSession } from '__mocks__';
 import { renderWithContext } from 'tools';
-import { type AddressTemplate } from '../../patient-registration.types';
+import { type AddressTemplate, type NameTemplate } from '../../patient-registration.types';
 import { type RegistrationConfig, esmPatientRegistrationSchema } from '../../../config-schema';
 import { type Resources } from '../../../offline.resources';
 import {
@@ -20,6 +20,7 @@ const mockUseOrderedAddressHierarchyLevels = jest.mocked(useOrderedAddressHierar
 
 const mockResourcesContextValue = {
   addressTemplate: {} as AddressTemplate,
+  nameTemplate: {} as NameTemplate,
   currentSession: mockSession.data,
   identifierTypes: [],
   relationshipTypes: { results: [] },

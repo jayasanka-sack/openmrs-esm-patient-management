@@ -7,6 +7,7 @@ import { useConnectivity, useSession } from '@openmrs/esm-framework';
 import {
   fetchAddressTemplate,
   fetchAllRelationshipTypes,
+  fetchNameTemplate,
   fetchPatientIdentifierTypesWithSources,
 } from './offline.resources';
 import { ResourcesContextProvider } from './resources-context';
@@ -18,6 +19,7 @@ export default function Root() {
   const isOnline = useConnectivity();
   const currentSession = useSession();
   const { data: addressTemplate } = useSWRImmutable('patientRegistrationAddressTemplate', fetchAddressTemplate);
+  const { data: nameTemplate } = useSWRImmutable('patientRegistrationNameTemplate', fetchNameTemplate);
   const { data: relationshipTypes } = useSWRImmutable(
     'patientRegistrationRelationshipTypes',
     fetchAllRelationshipTypes,
@@ -37,6 +39,7 @@ export default function Root() {
         <ResourcesContextProvider
           value={{
             addressTemplate,
+            nameTemplate,
             relationshipTypes,
             identifierTypes,
             currentSession,
