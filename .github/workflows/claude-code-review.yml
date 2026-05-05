@@ -1,21 +1,16 @@
 name: Claude Code Review
-# See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-# or https://code.claude.com/docs/en/cli-reference for available options
-# claude_args: '--allowed-tools Bash(gh pr:*)'
 on:
   pull_request_target:
     types: [opened, ready_for_review, reopened]
-
 
 jobs:
   claude-review:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
-      issues: read
-      id-token: write
-      actions: read # Required for Claude to read CI results on PRs
+      pull-requests: write   # needs write to post review comments
+      issues: write          # PR-level comments use the issues API
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +22,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          allowed_non_write_users: '*'
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
           prompt: |
