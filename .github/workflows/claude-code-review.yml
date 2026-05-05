@@ -3,8 +3,8 @@ name: Claude Code Review
 # or https://code.claude.com/docs/en/cli-reference for available options
 # claude_args: '--allowed-tools Bash(gh pr:*)'
 on:
-  pull_request:
-    types: [opened, synchronize, ready_for_review, reopened]
+  pull_request_target:
+    types: [opened, ready_for_review, reopened]
 
 
 jobs:
@@ -29,5 +29,5 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
-#          prompt: |
-#            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+          prompt: |
+            /code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
